@@ -1,7 +1,9 @@
-import user from "./user";
+import options from "./options";
+import userRankings from "./userRankings";
 
 const Query = {
-	user,
+	options,
+	userRankings
 };
 
 export default Query;
