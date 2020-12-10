@@ -9,6 +9,8 @@ const jwtValidator = async req => {
 		req.headers["x-access-token"] ||
 		req.headers["authorization"]; // Express headers are auto converted to lowercase
 
+	req.user = { signedIn: false };
+
 	if (token) {
 		if (token.startsWith("Bearer ")) {
 			token = token.replace("Bearer ", "");
@@ -32,7 +34,6 @@ const jwtValidator = async req => {
 			}
 		} catch (er) {
 			req.jwt = null;
-			req.user = { signedIn: false };
 		}
 	}
 };
