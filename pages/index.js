@@ -56,7 +56,7 @@ const Vote = ({ options, setIsEditing }) => {
 
 	const listRef = createRef();
 	const [selectedOptions, setSelectedOptions] = useState(
-		options.map(a => a.id)
+		options.filter(a => a.active).map(a => a.id)
 	);
 	const [eliminatedOptions, setEliminatedOptions] = useState([]);
 

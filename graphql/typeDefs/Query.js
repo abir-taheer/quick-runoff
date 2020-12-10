@@ -7,5 +7,6 @@ export default gql`
 		results: Result
 		authenticatedUser: User
 		users: [User]
+		peopleWhoVoted: [User]
 	}
 `;

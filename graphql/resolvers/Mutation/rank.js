@@ -25,13 +25,15 @@ export default async (root, { options }, { user, models, signedIn }) => {
 		where: { userId: user.id },
 	});
 
-	options = options.filter(id => Boolean(realOptions[id]));
+	options = options.filter(id => Boolean(optionMap[id]));
 
 	const rankings = options.map((id, index) => ({
 		userId: user.id,
 		optionId: id,
 		rank: index
 	}));
+
+	console.log(rankings);
 
 	await models.rankings.bulkCreate(rankings);
 

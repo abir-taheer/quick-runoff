@@ -1,16 +1,23 @@
 import { gql, useQuery } from "@apollo/client";
 import {
-	Avatar, Button,
+	Button,
 	List,
 	ListItem,
-	ListItemAvatar,
-	ListItemSecondaryAction
+	ListItemSecondaryAction,
+	ListItemText,
 } from "@material-ui/core";
 import { Block } from "@material-ui/icons";
 import Link from "next/link";
 
 const QUERY = gql`
 	query {
+		peopleWhoVoted {
+			id
+			firstName
+			lastName
+			email
+		}
+
 		results {
 			rounds {
 				number
@@ -133,6 +140,19 @@ export default function Results() {
 					? "Tie"
 					: "No Winner"}
 			</h4>
+
+			<br />
+			<br />
+			<List>
+				{data.peopleWhoVoted.map(i => (
+					<ListItem key={i.id}>
+						<ListItemText
+							primary={i.firstName + " " + i.lastName}
+							secondary={i.email}
+						/>
+					</ListItem>
+				))}
+			</List>
 		</div>
 	);
 }
