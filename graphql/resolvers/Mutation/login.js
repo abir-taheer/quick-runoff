@@ -41,7 +41,7 @@ export default async (root, { idToken }, { user, models }) => {
 
 	if (!existingUser) {
 		throw new ForbiddenError(
-			"Your email address is not in the database. Contact stuyboe@gmail.com if you think this is a mistake."
+			"Your email address is not in the database. Contact abir@taheer.me if you think this is a mistake."
 		);
 	}
 

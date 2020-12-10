@@ -20,28 +20,15 @@ if (config.url) {
 	);
 }
 
-fs.readdirSync(__dirname)
-	.filter(file => {
-		return (
-			file.indexOf(".") !== 0 &&
-			file !== basename &&
-			file.slice(-3) === ".js"
-		);
-	})
-	.forEach(file => {
-		const model = require(path.join(__dirname, file))(
-			sequelize,
-			Sequelize.DataTypes
-		);
-		db[model.name] = model;
-	});
+const options = require("./options")(sequelize, Sequelize.DataTypes);
+const users = require("./users")(sequelize, Sequelize.DataTypes);
+const rankings = require("./rankings")(sequelize, Sequelize.DataTypes);
 
-Object.keys(db).forEach(modelName => {
-	if (db[modelName].associate) {
-		console.log(modelName);
-		db[modelName].associate(db);
-	}
-});
+Object.assign(db, { options, rankings, users });
+
+options.associate(db);
+users.associate(db);
+rankings.associate(db);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
