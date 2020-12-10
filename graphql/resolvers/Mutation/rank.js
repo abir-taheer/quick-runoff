@@ -21,7 +21,7 @@ export default async (root, { options }, { user, models, signedIn }) => {
 		optionMap[option.id] = option;
 	});
 
-	await models.rankings.destory({
+	await models.rankings.destroy({
 		where: { userId: user.id },
 	});
 

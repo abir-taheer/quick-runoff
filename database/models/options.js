@@ -1,4 +1,6 @@
 "use strict";
+import findOneLoader from "../findOneLoader";
+
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class options extends Model {
@@ -12,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
 			options.hasMany(models.rankings);
 			options.belongsTo(models.users, { foreignKey: "addedBy" });
 		}
+
+		static idLoader = findOneLoader(options, 'id');
 	}
 	options.init(
 		{

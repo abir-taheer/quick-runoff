@@ -1,12 +1,13 @@
 import { ForbiddenError } from "apollo-server-micro";
 import { COOKIE_SECRET, GOOGLE_CLIENT_ID } from "../../../constants";
 import { sign } from "jsonwebtoken";
+import { serialize } from 'cookie';
 
 import { OAuth2Client } from "google-auth-library";
 
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
-export default async (root, { idToken }, { user, models, signedIn }) => {
+export default async (root, { idToken }, { user, models, signedIn, res }) => {
 	if (signedIn) {
 		throw new ForbiddenError("You are already signed in.");
 	}
@@ -52,7 +53,7 @@ export default async (root, { idToken }, { user, models, signedIn }) => {
 
 	await existingUser.save();
 
-	return sign(
+	const jwt = sign(
 		{
 			user: {
 				id: existingUser.id,
@@ -64,4 +65,8 @@ export default async (root, { idToken }, { user, models, signedIn }) => {
 		COOKIE_SECRET,
 		{ expiresIn: "14d" }
 	);
+
+	res.setHeader('Set-Cookie', serialize('auth-jwt', jwt, { maxAge: 1000 * 60 * 60 * 14 }));
+
+	return jwt;
 };

@@ -15,7 +15,7 @@ const USER_QUERY = gql`
 `;
 
 const UserProvider = ({ children }) => {
-	const { data, error, loading, refetch } = useQuery(USER_QUERY);
+	const { data, loading, refetch } = useQuery(USER_QUERY);
 
 	if (loading) {
 		return null;

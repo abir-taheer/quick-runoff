@@ -8,10 +8,10 @@ const models = require("./../../database/models");
 const apolloServer = new ApolloServer({
 	typeDefs,
 	resolvers,
-	context: async ({ req }) => {
+	context: async ({ req, res }) => {
 		await applyJWT(req);
 
-		return { user: req.user, req, models, signedIn: req.signedIn };
+		return { user: req.user, req, models, signedIn: req.signedIn, res };
 	},
 });
 
