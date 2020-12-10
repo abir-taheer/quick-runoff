@@ -3,6 +3,7 @@ import userRankings from "./userRankings";
 import users from "./users";
 import authenticatedUser from "./authenticatedUser";
 import results from "./results";
+import peopleWhoVoted from "./peopleWhoVoted";
 
 const Query = {
 	options,
@@ -10,6 +11,7 @@ const Query = {
 	users,
 	authenticatedUser,
 	results,
+	peopleWhoVoted
 };
 
 export default Query;
