@@ -1,5 +1,5 @@
-export default (root, args, {models, user}) => {
-	if(user.signedIn){
+export default (root, args, {models, signedIn}) => {
+	if(signedIn){
 		return models.options.findAll();
 	}
 

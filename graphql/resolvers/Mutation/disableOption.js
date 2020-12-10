@@ -1,11 +1,11 @@
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
 
-export default async (root, { id }, { user, models }) => {
-	if (!user.signedIn) {
+export default async (root, { id }, { user, models, signedIn }) => {
+	if (!signedIn) {
 		throw new ForbiddenError("You must be signed in to remove an option");
 	}
 
-	const option = await options.findOne({ where: { id } });
+	const option = await models.options.findOne({ where: { id } });
 
 	if (!option) {
 		throw new UserInputError("That option does not exist");

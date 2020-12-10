@@ -1,7 +1,7 @@
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
 
-export default async (root, { options }, { user, models }) => {
-	if (!user.signedIn) {
+export default async (root, { options }, { user, models, signedIn }) => {
+	if (! signedIn) {
 		throw new ForbiddenError("You need to be signed in to rank choices");
 	}
 

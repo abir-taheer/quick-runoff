@@ -6,8 +6,8 @@ import { OAuth2Client } from "google-auth-library";
 
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
-export default async (root, { idToken }, { user, models }) => {
-	if (user.signedIn) {
+export default async (root, { idToken }, { user, models, signedIn }) => {
+	if (signedIn) {
 		throw new ForbiddenError("You are already signed in.");
 	}
 
@@ -37,7 +37,7 @@ export default async (root, { idToken }, { user, models }) => {
 	}
 
 	const email = payload.email;
-	const existingUser = await models.users.findOne({ email });
+	const existingUser = await models.users.findOne({ where: { email } });
 
 	if (!existingUser) {
 		throw new ForbiddenError(
@@ -47,7 +47,7 @@ export default async (root, { idToken }, { user, models }) => {
 
 	existingUser.firstName = payload.given_name;
 	existingUser.lastName = payload.family_name;
-	existingUser.profilePic = payload.profilePic;
+	existingUser.profilePic = payload.picture;
 	existingUser.googleId = payload.sub;
 
 	await existingUser.save();
@@ -55,7 +55,7 @@ export default async (root, { idToken }, { user, models }) => {
 	return sign(
 		{
 			user: {
-				id: user.id,
+				id: existingUser.id,
 				sub: payload.sub,
 			},
 			audience: "sci-fi-staley.vercel.app",

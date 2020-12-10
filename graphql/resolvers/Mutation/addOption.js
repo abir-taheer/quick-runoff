@@ -1,7 +1,7 @@
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
 
-export default (root, { name }, { user, models }) => {
-	if (!user.signedIn) {
+export default (root, { name }, { signedIn, models }) => {
+	if (!signedIn) {
 		throw new ForbiddenError("You need to be signed in to add an option");
 	}
 

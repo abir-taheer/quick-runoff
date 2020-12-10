@@ -1,1 +1,1 @@
-export default (root, args, {models, user}) => user.signedIn ? models.users.findAll() : null;
+export default (root, args, {models, signedIn}) => signedIn ? models.users.findAll() : null;

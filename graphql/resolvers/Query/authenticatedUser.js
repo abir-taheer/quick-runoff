@@ -1,1 +1,1 @@
-export default (root, args, {user}) => user.signedIn ? user: null;
+export default (root, args, {user, signedIn}) => signedIn ? user: null;

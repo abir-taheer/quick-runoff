@@ -9,7 +9,7 @@ const jwtValidator = async req => {
 		req.headers["x-access-token"] ||
 		req.headers["authorization"]; // Express headers are auto converted to lowercase
 
-	req.user = { signedIn: false };
+	req.signedIn = false;
 
 	if (token) {
 		if (token.startsWith("Bearer ")) {
@@ -21,15 +21,13 @@ const jwtValidator = async req => {
 			if (req.jwt) {
 				const user = await users.findOne({
 					where: {
-						userId: req.jwt.userId,
+						id: req.jwt.user.id,
 					},
 				});
 
 				if (user) {
-					req.user = {
-						...user,
-						signedIn: true,
-					};
+					req.user = user;
+					req.signedIn = true;req
 				}
 			}
 		} catch (er) {

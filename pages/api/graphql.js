@@ -11,7 +11,7 @@ const apolloServer = new ApolloServer({
 	context: async ({ req }) => {
 		await applyJWT(req);
 
-		return { user: req.user, req, models };
+		return { user: req.user, req, models, signedIn: req.signedIn };
 	},
 });
 
