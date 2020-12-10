@@ -1,8 +1,7 @@
 import { verify } from "jsonwebtoken";
 import { COOKIE_SECRET } from "../constants";
-import models from "./../database";
 
-const { users } = models;
+const { users } = require("./../database/models");
 
 const jwtValidator = async req => {
 	let token =

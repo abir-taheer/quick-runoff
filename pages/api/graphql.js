@@ -2,7 +2,8 @@ import { ApolloServer } from "apollo-server-micro";
 import typeDefs from "../../graphql/typeDefs";
 import resolvers from "../../graphql/resolvers";
 import applyJWT from "../../utils/applyJWT";
-import models from "../../database";
+
+const models = require("./../../database/models");
 
 const apolloServer = new ApolloServer({
 	typeDefs,
