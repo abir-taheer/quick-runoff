@@ -12,6 +12,7 @@ import {
 	TextField,
 } from "@material-ui/core";
 import { Close, Refresh } from "@material-ui/icons";
+import Link from "next/link";
 
 const QUERY = gql`
 	query {
@@ -91,7 +92,7 @@ export default function Admin() {
 			<br />
 			<h2>Existing Options:</h2>
 			<List>
-				{data.options.filter(Boolean).map(option => (
+				{data.options.filter(a => Boolean(a.active)).map(option => (
 					<ListItem
 						key={option.id}
 						selected={false}
@@ -114,6 +115,18 @@ export default function Admin() {
 					</ListItem>
 				))}
 			</List>
+			<br/>
+			<Link href={"/results"}>
+				<Button variant={"outlined"} color={"primary"}>
+					Results
+				</Button>
+			</Link>
+			<br/>
+			<Link href={"/"}>
+				<Button variant={"outlined"} color={"primary"}>
+					Home
+				</Button>
+			</Link>
 		</div>
 	);
 }
