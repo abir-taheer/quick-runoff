@@ -4,5 +4,4 @@ const Query = {
 	user,
 };
 
-
 export default Query;

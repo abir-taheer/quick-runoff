@@ -1,4 +1,4 @@
-import {gql} from "apollo-server-micro"
+import { gql } from "apollo-server-micro";
 
 export default gql`
 	type User {
@@ -6,5 +6,7 @@ export default gql`
 		firstName: String
 		lastName: String
 		email: String
+		googleId: String
+		profilePic: String
 	}
 `;
