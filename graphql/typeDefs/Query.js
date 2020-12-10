@@ -5,5 +5,7 @@ export default gql`
 		options: [Option]
 		userRankings: [Ranking]
 		results: Result
+		authenticatedUser: User
+		users: [User]
 	}
 `;

@@ -4,9 +4,7 @@ import { sign } from "jsonwebtoken";
 
 import { OAuth2Client } from "google-auth-library";
 
-
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
-
 
 export default async (root, { idToken }, { user, models }) => {
 	if (user) {

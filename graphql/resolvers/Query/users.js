@@ -1,0 +1,1 @@
+export default (root, args, {models, user}) => user.signedIn ? models.users.findAll() : null;
