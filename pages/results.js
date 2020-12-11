@@ -143,6 +143,7 @@ export default function Results() {
 
 			<br />
 			<br />
+			<p>People who've voted</p>
 			<List>
 				{data.peopleWhoVoted.map(i => (
 					<ListItem key={i.id}>
